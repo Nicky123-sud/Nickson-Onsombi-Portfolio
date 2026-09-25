@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nicky123-sud.github.io/Nickson-Onsombi-Portfolio/sitemap.xml
