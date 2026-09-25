@@ -1,0 +1,8 @@
+[build]
+  # BASE_PATH=/ overrides the GitHub Pages subpath default in vite.config.ts
+  # so assets resolve correctly at Netlify's own root domain.
+  command = "BASE_PATH=/ npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
