@@ -22,18 +22,23 @@ export function Skills() {
             <Reveal
               key={group.id}
               delay={index * 0.05}
-              className="group rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 transition-colors hover:border-[var(--accent)]/50"
+              className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 transition-colors hover:border-[var(--accent)]/50"
             >
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--accent)]">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
+                style={{ background: index % 2 === 0 ? "var(--accent)" : "var(--accent-2)" }}
+              />
+              <p className="relative font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--accent)]">
                 {String(index + 1).padStart(2, "0")}
               </p>
-              <h3 className="mt-2 font-[var(--font-display)] text-lg font-semibold text-[var(--text)]">
+              <h3 className="relative mt-2 font-[var(--font-display)] text-lg font-semibold text-[var(--text)]">
                 {group.title}
               </h3>
-              <p className="mt-1.5 text-sm text-[var(--text-muted)]">
+              <p className="relative mt-1.5 text-sm text-[var(--text-muted)]">
                 {group.description}
               </p>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="relative mt-4 flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
                   <Badge key={skill}>{skill}</Badge>
                 ))}

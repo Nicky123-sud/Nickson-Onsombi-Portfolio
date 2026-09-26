@@ -4,7 +4,6 @@ import { Menu, X } from "lucide-react";
 import { navItems } from "@/data/nav";
 import { profile } from "@/data/profile";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 const sectionIds = navItems.map((item) => item.href.replace("#", ""));
 
@@ -42,11 +41,17 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+      className="sticky top-0 z-50 border-b transition-[background-color,backdrop-filter,border-color] duration-300"
+      style={
         scrolled
-          ? "border-[var(--border)] bg-[var(--bg)]/85 backdrop-blur-md"
-          : "border-transparent bg-transparent"
-      }`}
+          ? {
+              background: "rgba(7,17,31,.72)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              borderColor: "var(--border)",
+            }
+          : { background: "transparent", borderColor: "transparent" }
+      }
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link
@@ -64,12 +69,13 @@ export function Header() {
               <button
                 key={item.href}
                 type="button"
+                data-cursor="link"
                 onClick={() => goToSection(item.href)}
                 aria-current={isActive ? "true" : undefined}
                 className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
                   isActive
                     ? "text-[var(--accent)]"
-                    : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text)]"
                 }`}
               >
                 {item.label}
@@ -79,9 +85,17 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
+          <a
+            href={profile.resumePath}
+            download
+            data-cursor="link"
+            className="hidden items-center rounded-full border border-[var(--border)] px-4 py-2 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] lg:inline-flex"
+          >
+            Download CV
+          </a>
           <button
             type="button"
+            data-cursor="link"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text)] md:hidden"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}

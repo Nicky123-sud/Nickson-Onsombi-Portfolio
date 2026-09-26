@@ -65,8 +65,8 @@ export function Experience() {
             <ol className="relative space-y-8 border-l border-[var(--border)] pl-6">
               {education.map((entry, index) => (
                 <Reveal as="li" key={entry.id} delay={index * 0.06} className="relative">
-                  <span className="absolute -left-[29px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-[var(--accent)] bg-[var(--bg)]" />
-                  <p className="font-mono text-xs text-[var(--accent)]">{entry.period}</p>
+                  <span className="absolute -left-[29px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-[var(--accent-2)] bg-[var(--bg)]" />
+                  <p className="font-mono text-xs text-[var(--accent-2)]">{entry.period}</p>
                   <h4 className="mt-1 font-[var(--font-display)] text-base font-semibold text-[var(--text)]">
                     {entry.title}
                   </h4>

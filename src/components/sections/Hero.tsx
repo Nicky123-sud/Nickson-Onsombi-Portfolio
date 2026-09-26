@@ -1,116 +1,125 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Download, Mail } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { ArrowRight, Download, Mail, MapPin } from "lucide-react";
 import { profile } from "@/data/profile";
 import { socialLinks } from "@/data/social";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { HeroVisual } from "@/components/sections/HeroVisual";
+import { HeroVisual3D } from "@/components/sections/HeroVisual3D";
 import { Container } from "@/components/ui/Container";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
-import portrait from "@/assets/images/nickson-profile-square.jpg";
+import { gsap } from "@/lib/gsap";
 
 const icons = { github: GithubIcon, linkedin: LinkedinIcon, mail: Mail, phone: Mail };
 
 export function Hero() {
   const reducedMotion = useReducedMotion();
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const targets = root.querySelectorAll("[data-hero-item]");
+
+    if (reducedMotion) {
+      gsap.set(targets, { opacity: 1, y: 0 });
+      return;
+    }
+
+    gsap.set(targets, { opacity: 0, y: 18 });
+    const tl = gsap.timeline({ delay: 0.1 });
+    tl.to(targets, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      stagger: 0.08,
+      ease: "power3.out",
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, [reducedMotion]);
 
   return (
     <section
       id="home"
-      className="relative overflow-hidden border-b border-[var(--border)] bg-grid pt-16 pb-20 sm:pt-24 sm:pb-28"
+      className="bg-glow relative flex min-h-screen items-center overflow-hidden border-b border-[var(--border)] bg-grid pt-24 pb-16"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[480px] bg-gradient-to-b from-[var(--accent)]/10 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[480px] bg-gradient-to-b from-[var(--accent)]/8 via-transparent to-transparent"
       />
 
-      <Container className="relative grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
-        <motion.div
-          initial={{ opacity: 0, y: reducedMotion ? 0 : 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="mb-6 flex items-center gap-3 lg:hidden">
-            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-[var(--accent)]/60 shadow-[0_0_0_4px_var(--surface)]">
-              <img
-                src={portrait}
-                alt="Portrait of Nickson Onsombi Nyaboga"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <p className="font-mono text-xs text-[var(--text-muted)]">
-              {profile.location} · {profile.availability}
-            </p>
-          </div>
-
-          <p className="font-mono text-sm text-[var(--accent)]">
-            Hi, I'm {profile.fullName}
+      <Container ref={rootRef} className="relative grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
+        <div>
+          <p
+            data-hero-item
+            className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-[var(--accent)]"
+          >
+            Full-Stack Software Engineer
           </p>
 
-          <h1 className="mt-4 break-words font-[var(--font-display)] text-3xl font-semibold leading-[1.1] text-balance text-[var(--text)] sm:text-5xl lg:text-6xl">
-            {profile.title}
+          <h1
+            data-hero-item
+            className="mt-5 break-words font-[var(--font-display)] text-4xl font-semibold leading-[1.08] text-balance text-[var(--text)] sm:text-6xl lg:text-7xl"
+          >
+            Building digital systems that matter.
           </h1>
 
-          <p className="mt-4 max-w-xl font-[var(--font-display)] text-xl text-[var(--text-muted)] sm:text-2xl">
-            {profile.tagline}
-          </p>
-
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--text-muted)]">
+          <p
+            data-hero-item
+            className="mt-6 max-w-xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg"
+          >
             {profile.summary}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div data-hero-item className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-medium text-[var(--accent-contrast)] transition-transform hover:-translate-y-0.5 hover:shadow-[0_0_24px_-4px_var(--accent)]"
+              data-cursor="link"
+              className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-[var(--accent-contrast)] transition-transform hover:-translate-y-0.5"
+              style={{ background: "var(--gradient-primary)" }}
             >
-              View Projects <ArrowRight size={16} />
+              Explore My Work <ArrowRight size={16} />
             </a>
             <a
               href={profile.resumePath}
               download
+              data-cursor="link"
               className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
               <Download size={16} /> Download CV
             </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
-            >
-              Let's Work Together
-            </a>
           </div>
 
-          <div className="mt-10 flex items-center gap-4">
-            {socialLinks.map((link) => {
-              const Icon = icons[link.icon];
-              return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-                  aria-label={link.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                >
-                  <Icon size={17} />
-                </a>
-              );
-            })}
-          </div>
-        </motion.div>
-
-        <div className="hidden lg:block">
-          <div className="relative mx-auto w-fit">
-            <div className="relative h-64 w-64 overflow-hidden rounded-[2.5rem] border border-[var(--accent)]/40 shadow-[0_0_60px_-15px_var(--accent)]">
-              <img
-                src={portrait}
-                alt="Portrait of Nickson Onsombi Nyaboga"
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 rounded-[2.5rem] ring-1 ring-inset ring-[var(--accent)]/30" />
+          <div data-hero-item className="mt-10 flex flex-wrap items-center gap-6">
+            <div className="flex items-center gap-4">
+              {socialLinks.map((link) => {
+                const Icon = icons[link.icon];
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                    aria-label={link.label}
+                    data-cursor="link"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                  >
+                    <Icon size={17} />
+                  </a>
+                );
+              })}
             </div>
+            <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--text-muted)]">
+              <MapPin size={14} className="text-[var(--accent-2)]" />
+              Kenya
+            </span>
           </div>
-          <HeroVisual />
+        </div>
+
+        <div data-hero-item className="hidden lg:block">
+          <HeroVisual3D />
         </div>
       </Container>
     </section>

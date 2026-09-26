@@ -22,7 +22,9 @@ export function Resume() {
             <a
               href={profile.resumePath}
               download={profile.resumeFileName}
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-medium text-[var(--accent-contrast)] transition-transform hover:-translate-y-0.5 hover:shadow-[0_0_24px_-4px_var(--accent)]"
+              data-cursor="link"
+              className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-[var(--accent-contrast)] transition-transform hover:-translate-y-0.5"
+              style={{ background: "var(--gradient-primary)" }}
             >
               <Download size={16} /> Download CV (PDF)
             </a>

@@ -5,22 +5,18 @@
   --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --color-ink-950: #05070a;
-  --color-ink-900: #0a0e14;
-  --color-ink-800: #10151d;
-  --color-ink-700: #161d27;
-  --color-ink-600: #232b38;
-  --color-ink-500: #3a4454;
-
-  --color-mist-100: #f7f8fa;
-  --color-mist-200: #eef0f3;
-  --color-mist-300: #e2e5ea;
-
-  --color-accent-400: #22d3ee;
-  --color-accent-500: #06b6d4;
-  --color-accent-600: #0891b2;
-
-  --color-amber-400: #f5a623;
+  /* Premium Software Engineering x Futuristic Systems x African Technology */
+  --color-bg: #07111f;
+  --color-bg-secondary: #0b1728;
+  --color-surface: #101f33;
+  --color-surface-2: #14263d;
+  --color-text: #f4f7fb;
+  --color-text-secondary: #a9b7c8;
+  --color-text-muted: #6f8197;
+  --color-accent: #29d3ff;
+  --color-accent-2: #19c37d;
+  --color-highlight: #8be7ff;
+  --color-border: #1c344e;
 
   --animate-float-slow: float 9s ease-in-out infinite;
   --animate-float-slower: float 13s ease-in-out infinite;
@@ -57,27 +53,19 @@
 :root {
   color-scheme: dark;
 
-  --bg: var(--color-ink-950);
-  --surface: var(--color-ink-900);
-  --surface-2: var(--color-ink-800);
-  --border: var(--color-ink-600);
-  --text: #e7ecf3;
-  --text-muted: #9aa5b4;
-  --accent: var(--color-accent-400);
-  --accent-contrast: var(--color-ink-950);
-}
-
-:root[data-theme="light"] {
-  color-scheme: light;
-
-  --bg: var(--color-mist-100);
-  --surface: #ffffff;
-  --surface-2: var(--color-mist-200);
-  --border: var(--color-mist-300);
-  --text: #0b1220;
-  --text-muted: #56606f;
-  --accent: var(--color-accent-600);
-  --accent-contrast: #ffffff;
+  --bg: var(--color-bg);
+  --bg-2: var(--color-bg-secondary);
+  --surface: var(--color-surface);
+  --surface-2: var(--color-surface-2);
+  --border: var(--color-border);
+  --text: var(--color-text);
+  --text-secondary: var(--color-text-secondary);
+  --text-muted: var(--color-text-muted);
+  --accent: var(--color-accent);
+  --accent-2: var(--color-accent-2);
+  --highlight: var(--color-highlight);
+  --accent-contrast: var(--color-bg);
+  --gradient-primary: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-2) 100%);
 }
 
 html {
@@ -123,13 +111,33 @@ body {
   border-radius: 2px;
 }
 
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .bg-grid {
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px);
   background-size: 56px 56px;
+}
+
+.bg-glow {
+  background-image:
+    radial-gradient(560px circle at 12% 8%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%),
+    radial-gradient(520px circle at 88% 32%, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 60%);
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+/* Custom cursor (desktop, fine-pointer only — see CustomCursor.tsx) */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-none-desktop {
+    cursor: none;
+  }
 }
