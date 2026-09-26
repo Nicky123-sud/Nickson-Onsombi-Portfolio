@@ -1,10 +1,14 @@
 export type ProjectStatus = "Live" | "In Development" | "Completed" | "Prototype";
 
+const projectImage = (file: string) => `${import.meta.env.BASE_URL}images/projects/${file}`;
+
 export type Project = {
   slug: string;
   title: string;
   category: string;
   status: ProjectStatus;
+  /** Real project visual (public/images/projects). Falls back to an SVG diagram when absent. */
+  image?: string;
   visual: "miti" | "platform" | "commerce" | "api" | "records" | "sites";
   description: string;
   longDescription: string;
@@ -25,6 +29,7 @@ export const projects: Project[] = [
     title: "Miti App — Miti Ni Poa",
     category: "AI-Powered Agritech Platform",
     status: "Live",
+    image: projectImage("miti-app-project.webp"),
     visual: "miti",
     featured: true,
     description:
@@ -58,6 +63,7 @@ export const projects: Project[] = [
     title: "SRDC Multilingual Website",
     category: "Full-Stack · Freelance",
     status: "In Development",
+    image: projectImage("srdc-project.webp"),
     visual: "platform",
     featured: true,
     description:
@@ -89,6 +95,7 @@ export const projects: Project[] = [
     title: "Point-of-Sale System with M-Pesa",
     category: "Personal Project",
     status: "Completed",
+    image: projectImage("mpesa-pos-project.webp"),
     visual: "api",
     description:
       "A POS application with M-Pesa STK Push payments, tested against the Safaricom Daraja sandbox.",
@@ -115,6 +122,7 @@ export const projects: Project[] = [
     title: "WiFi Billing System",
     category: "Personal Project",
     status: "Completed",
+    image: projectImage("wifi-billing-project.webp"),
     visual: "api",
     description:
       "A billing platform with package management, user authentication and secure online M-Pesa payments.",
@@ -142,6 +150,7 @@ export const projects: Project[] = [
     title: "Online Shoe Store",
     category: "Personal Project",
     status: "Completed",
+    image: projectImage("shoe-store-project.webp"),
     visual: "commerce",
     description:
       "An e-commerce platform with product listings, cart, user authentication, order management and a responsive UI.",
@@ -166,6 +175,7 @@ export const projects: Project[] = [
     title: "Membership & Library Management Systems",
     category: "Personal Project",
     status: "Completed",
+    image: projectImage("library-management-project.webp"),
     visual: "records",
     description:
       "Record-management systems covering members, stock, cataloguing, loans and reporting.",
@@ -190,6 +200,7 @@ export const projects: Project[] = [
     title: "Client Websites",
     category: "Freelance",
     status: "Completed",
+    image: projectImage("client-websites-project.webp"),
     visual: "sites",
     description:
       "Websites developed for Nyanchwa Adventist Primary School, Amatech Systems, and Hon. Patrick Lumumba.",

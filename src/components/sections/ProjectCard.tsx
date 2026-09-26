@@ -16,9 +16,18 @@ const statusStyles: Record<Project["status"], string> = {
 export function ProjectCard({ project, delay = 0 }: { project: Project; delay?: number }) {
   return (
     <Reveal delay={delay} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] transition-colors hover:border-[var(--accent)]/50">
-      <div className="relative overflow-hidden border-b border-[var(--border)]">
-        <div className="transition-transform duration-500 ease-out group-hover:scale-105">
-          <ProjectVisual variant={project.visual} />
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-[var(--border)]">
+        <div className="h-full w-full transition-transform duration-500 ease-out group-hover:scale-105">
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={`${project.title} preview`}
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <ProjectVisual variant={project.visual} />
+          )}
         </div>
         <span
           className={`absolute right-3 top-3 rounded-full border bg-[var(--bg)]/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide backdrop-blur ${statusStyles[project.status]}`}

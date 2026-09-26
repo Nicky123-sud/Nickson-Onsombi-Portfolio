@@ -68,7 +68,15 @@ export function ProjectDetail() {
         </Reveal>
 
         <Reveal delay={0.05} className="mt-10 overflow-hidden rounded-2xl border border-[var(--border)]">
-          <ProjectVisual variant={project.visual} />
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={`${project.title} preview`}
+              className="aspect-[16/9] w-full object-cover"
+            />
+          ) : (
+            <ProjectVisual variant={project.visual} />
+          )}
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_320px]">
