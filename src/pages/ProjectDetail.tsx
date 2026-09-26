@@ -59,7 +59,8 @@ export function ProjectDetail() {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2.5 text-sm font-medium text-[var(--accent-contrast)]"
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium text-[var(--accent-contrast)]"
+                style={{ background: "var(--gradient-primary)" }}
               >
                 <ExternalLink size={15} /> Live Demo
               </a>
@@ -121,14 +122,14 @@ export function ProjectDetail() {
                 {project.features.map((feature) => (
                   <li key={feature.label} className="flex items-start gap-2.5 text-sm text-[var(--text-muted)]">
                     {feature.implemented ? (
-                      <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+                      <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[var(--accent-2)]" />
                     ) : (
                       <Circle size={16} className="mt-0.5 shrink-0 text-[var(--text-muted)]" />
                     )}
                     <span>
                       {feature.label}
                       {!feature.implemented && (
-                        <span className="ml-2 font-mono text-[10px] uppercase tracking-wide text-[var(--color-amber-400)]">
+                        <span className="ml-2 font-mono text-[10px] uppercase tracking-wide text-[var(--highlight)]">
                           planned
                         </span>
                       )}

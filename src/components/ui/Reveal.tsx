@@ -1,5 +1,5 @@
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type RevealProps = {
@@ -10,29 +10,50 @@ type RevealProps = {
   y?: number;
 };
 
+/** Scroll-triggered fade/rise reveal (GSAP + ScrollTrigger), inert under prefers-reduced-motion. */
 export function Reveal({ children, delay = 0, className, as = "div", y = 20 }: RevealProps) {
+  const ref = useRef<HTMLDivElement | HTMLLIElement>(null);
   const reducedMotion = useReducedMotion();
 
-  const variants: Variants = {
-    hidden: { opacity: 0, y: reducedMotion ? 0 : y },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
 
-  const MotionTag = motion[as];
+    if (reducedMotion) {
+      gsap.set(el, { opacity: 1, y: 0 });
+      return;
+    }
+
+    gsap.set(el, { opacity: 0, y });
+    const trigger = ScrollTrigger.create({
+      trigger: el,
+      start: "top 90%",
+      once: true,
+      onEnter: () => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          delay,
+          ease: "power3.out",
+        });
+      },
+    });
+
+    return () => trigger.kill();
+  }, [delay, y, reducedMotion]);
+
+  if (as === "li") {
+    return (
+      <li ref={ref as React.RefObject<HTMLLIElement>} className={className}>
+        {children}
+      </li>
+    );
+  }
 
   return (
-    <MotionTag
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      variants={variants}
-    >
+    <div ref={ref as React.RefObject<HTMLDivElement>} className={className}>
       {children}
-    </MotionTag>
+    </div>
   );
 }

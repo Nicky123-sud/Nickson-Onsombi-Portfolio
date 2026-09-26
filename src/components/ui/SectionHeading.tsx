@@ -6,7 +6,7 @@ export function SectionHeading({
   description,
 }: {
   eyebrow: string;
-  title: string;
+  title?: string;
   description?: string;
 }) {
   return (
@@ -14,9 +14,11 @@ export function SectionHeading({
       <p className="font-mono text-xs uppercase tracking-[0.25em] text-[var(--accent)]">
         {eyebrow}
       </p>
-      <h2 className="mt-3 break-words font-[var(--font-display)] text-3xl font-semibold text-balance text-[var(--text)] sm:text-4xl">
-        {title}
-      </h2>
+      {title && (
+        <h2 className="mt-3 break-words font-[var(--font-display)] text-3xl font-semibold text-balance text-[var(--text)] sm:text-4xl">
+          {title}
+        </h2>
+      )}
       {description && (
         <p className="mt-4 text-base leading-relaxed text-[var(--text-muted)]">
           {description}

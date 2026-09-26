@@ -1,9 +1,14 @@
 import { type FormEvent, useState } from "react";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { ExternalLink, Mail, MapPin, Phone, Send } from "lucide-react";
 import { profile } from "@/data/profile";
+import { socialLinks } from "@/data/social";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+
+const githubLink = socialLinks.find((link) => link.icon === "github");
+const linkedinLink = socialLinks.find((link) => link.icon === "linkedin");
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -78,9 +83,42 @@ export function Contact() {
       <Container>
         <SectionHeading
           eyebrow="Contact"
-          title="Let's build something"
-          description="Have a project in mind or a role to discuss? I'd like to hear about it."
+          title="Let's build something useful."
+          description="Have a product, system or technical problem worth solving?"
         />
+
+        <Reveal delay={0.05} className="mt-8 flex flex-wrap items-center gap-3">
+          <a
+            href={`mailto:${profile.email}`}
+            data-cursor="link"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-[var(--accent-contrast)] transition-transform hover:-translate-y-0.5"
+            style={{ background: "var(--gradient-primary)" }}
+          >
+            <Mail size={16} /> Email Me
+          </a>
+          {githubLink && (
+            <a
+              href={githubLink.href}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor="link"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <GithubIcon size={16} /> View GitHub
+            </a>
+          )}
+          {linkedinLink && (
+            <a
+              href={linkedinLink.href}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor="link"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <LinkedinIcon size={16} /> LinkedIn <ExternalLink size={13} />
+            </a>
+          )}
+        </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <Reveal className="space-y-6">
@@ -187,7 +225,9 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-medium text-[var(--accent-contrast)] transition-transform hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-60"
+                  data-cursor="link"
+                  className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-[var(--accent-contrast)] transition-transform hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-60"
+                  style={{ background: "var(--gradient-primary)" }}
                 >
                   {status === "loading" ? "Sending…" : "Send Message"}
                   <Send size={15} />
@@ -195,7 +235,7 @@ export function Contact() {
 
                 <div role="status" aria-live="polite" className="text-sm">
                   {status === "success" && (
-                    <span className="text-[var(--accent)]">
+                    <span className="text-[var(--accent-2)]">
                       Thanks — your message is on its way.
                     </span>
                   )}

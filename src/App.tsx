@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { RouteScrollToHash } from "@/components/layout/RouteScrollToHash";
+import { CustomCursor } from "@/components/layout/CustomCursor";
 import { Home } from "@/pages/Home";
 
 const ProjectDetail = lazy(() =>
@@ -23,6 +24,7 @@ export default function App() {
         Skip to content
       </a>
       <RouteScrollToHash />
+      <CustomCursor />
       <Header />
       <main id="main-content" className="flex-1">
         <Suspense fallback={<div className="min-h-[60vh]" />}>
