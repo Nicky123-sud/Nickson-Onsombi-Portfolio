@@ -8,7 +8,8 @@ import portrait from "@/assets/images/nickson-profile-square.jpg";
 
 const focusAreas = [
   "Python", "Django", "Django REST Framework", "React", "TypeScript",
-  "SQL", "MySQL", "AI Integration", "IoT", "APIs",
+  "SQL", "MySQL", "Data Analysis", "AI Integration", "IoT", "APIs",
+  "Technical Reporting",
 ];
 
 const principles = [
@@ -78,7 +79,7 @@ export function About() {
 
           <Reveal delay={0.1} className="space-y-5 text-base leading-relaxed text-[var(--text-secondary)]">
             <p>
-              I'm {profile.fullName}, a full-stack software engineer based in{" "}
+              I'm {profile.fullName}, a software engineer based in{" "}
               {profile.location}, specialising in Python backend engineering
               and full-stack web development. I hold a Diploma in Information
               Communication Technology from Kisii National Polytechnic

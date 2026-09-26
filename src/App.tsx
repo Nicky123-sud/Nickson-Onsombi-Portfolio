@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { RouteScrollToHash } from "@/components/layout/RouteScrollToHash";
 import { CustomCursor } from "@/components/layout/CustomCursor";
+import { WhatsAppFloatingButton } from "@/components/layout/WhatsAppFloatingButton";
 import { Home } from "@/pages/Home";
 
 const ProjectDetail = lazy(() =>
@@ -38,6 +39,7 @@ export default function App() {
       </main>
       <Footer />
       <ScrollToTop />
+      <WhatsAppFloatingButton />
     </div>
   );
 }
