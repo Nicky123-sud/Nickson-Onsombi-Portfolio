@@ -1,8 +1,9 @@
 # Nickson Onsombi — Portfolio
 
-Personal portfolio of Nickson Onsombi Nyaboga, a full-stack software engineer
-building web applications, APIs and data-driven systems. Built as a React +
-TypeScript single-page application (previously a static Bootstrap template).
+Personal portfolio of Nickson Onsombi Nyaboga, a software engineer building
+backend systems, APIs and AI-enabled platforms, with a dedicated Data &
+Analytics and technical-reporting capability. Built as a React + TypeScript
+single-page application (previously a static Bootstrap template).
 
 ## Stack
 

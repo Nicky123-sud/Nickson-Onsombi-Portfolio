@@ -2,10 +2,11 @@ import { type FormEvent, useState } from "react";
 import { ExternalLink, Mail, MapPin, Phone, Send } from "lucide-react";
 import { profile } from "@/data/profile";
 import { socialLinks } from "@/data/social";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
 
 const githubLink = socialLinks.find((link) => link.icon === "github");
 const linkedinLink = socialLinks.find((link) => link.icon === "linkedin");
@@ -17,6 +18,7 @@ const FORM_ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const whatsAppUrl = getWhatsAppUrl();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -96,6 +98,17 @@ export function Contact() {
           >
             <Mail size={16} /> Email Me
           </a>
+          {whatsAppUrl && (
+            <a
+              href={whatsAppUrl}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor="link"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-5 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:border-[var(--accent-2)] hover:text-[var(--accent-2)]"
+            >
+              <WhatsAppIcon size={16} /> WhatsApp
+            </a>
+          )}
           {githubLink && (
             <a
               href={githubLink.href}

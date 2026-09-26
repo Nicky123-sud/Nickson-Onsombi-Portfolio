@@ -1,5 +1,12 @@
+export type SkillCategory =
+  | "Software Engineering"
+  | "Data & Analytics"
+  | "Research & Reporting"
+  | "DevOps & Tools";
+
 export type SkillGroup = {
   id: string;
+  category: SkillCategory;
   title: string;
   description: string;
   skills: string[];
@@ -8,6 +15,7 @@ export type SkillGroup = {
 export const skillGroups: SkillGroup[] = [
   {
     id: "backend",
+    category: "Software Engineering",
     title: "Backend & APIs",
     description: "Server-side logic, authentication and third-party integrations.",
     skills: [
@@ -23,6 +31,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     id: "frontend",
+    category: "Software Engineering",
     title: "Frontend",
     description: "Interfaces that are fast, responsive and accessible.",
     skills: [
@@ -37,11 +46,42 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    id: "databases",
-    title: "Databases & Data",
-    description: "Modeling, validating and reporting on relational data.",
+    id: "systems",
+    category: "Software Engineering",
+    title: "Systems & IoT",
+    description: "Where software meets physical sensors, stakeholders and change.",
     skills: [
+      "ESP32",
+      "Environmental Sensors",
+      "MQTT Cloud Messaging",
+      "Requirements Gathering & Specifications",
+      "Change Management",
+      "Stakeholder Sign-off",
+    ],
+  },
+  {
+    id: "data-analytics",
+    category: "Data & Analytics",
+    title: "Data Analysis & Visualization",
+    description: "Working with structured data, from queries to charts.",
+    skills: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "SQL",
       "MySQL",
+      "PostgreSQL",
+      "Matplotlib",
+      "Seaborn",
+      "Data Validation",
+    ],
+  },
+  {
+    id: "data-management",
+    category: "Data & Analytics",
+    title: "Data Management",
+    description: "Structuring and maintaining relational, real-world data.",
+    skills: [
       "Relational Database Design",
       "Data Modelling",
       "Data Entry & Validation",
@@ -51,7 +91,25 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    id: "engineering",
+    id: "research-reporting",
+    category: "Research & Reporting",
+    title: "Research & Technical Reporting",
+    description: "Turning field and technical data into decision-ready documents.",
+    skills: [
+      "Data Collection",
+      "KoboToolbox",
+      "Data Cleaning",
+      "Data Validation",
+      "Research Analysis",
+      "Technical Reports",
+      "Field Reports",
+      "Data-Driven Reporting",
+      "Technical Documentation",
+    ],
+  },
+  {
+    id: "devops-tools",
+    category: "DevOps & Tools",
     title: "Engineering Practices",
     description: "How I keep software reliable as it grows.",
     skills: [
@@ -61,29 +119,12 @@ export const skillGroups: SkillGroup[] = [
       "Playwright Automated Testing",
       "CI Pipelines",
       "Docker",
-      "Technical Documentation",
+      "VS Code",
     ],
   },
   {
-    id: "systems",
-    title: "Systems & Support",
-    description: "Bridging technical work with real stakeholders.",
-    skills: [
-      "Requirements Gathering & Specifications",
-      "Change Management",
-      "Stakeholder Sign-off",
-      "User & Application Support",
-      "Software Installation & Configuration",
-    ],
-  },
-  {
-    id: "iot",
-    title: "IoT & Emerging Tech",
-    description: "Where software meets physical sensors and data.",
-    skills: ["ESP32", "Environmental Sensors", "MQTT Cloud Messaging"],
-  },
-  {
-    id: "tools",
+    id: "collaboration-tools",
+    category: "DevOps & Tools",
     title: "Tools & Collaboration",
     description: "The everyday toolkit for shipping and reporting work.",
     skills: [
@@ -94,4 +135,11 @@ export const skillGroups: SkillGroup[] = [
       "Slack",
     ],
   },
+];
+
+export const skillCategoryOrder: SkillCategory[] = [
+  "Software Engineering",
+  "Data & Analytics",
+  "Research & Reporting",
+  "DevOps & Tools",
 ];

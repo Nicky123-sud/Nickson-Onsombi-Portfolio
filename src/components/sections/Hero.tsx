@@ -43,7 +43,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="bg-glow relative flex min-h-screen items-center overflow-hidden border-b border-[var(--border)] bg-grid pt-24 pb-16"
+      className="bg-glow relative flex min-h-screen items-center overflow-hidden border-b border-[var(--border)] bg-grid pt-28 pb-16 sm:pt-32"
     >
       <div
         aria-hidden
@@ -56,7 +56,7 @@ export function Hero() {
             data-hero-item
             className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-[var(--accent)]"
           >
-            Full-Stack Software Engineer
+            Software Engineer — Data · Automation · Research Technology · AI
           </p>
 
           <h1
